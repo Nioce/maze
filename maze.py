@@ -49,6 +49,7 @@ coins = [coin1, coin2, coin3]
 
 
 # Game loop
+case = 1
 win = False
 done = False
 
@@ -104,7 +105,25 @@ while not done:
             if player_vy < 0:
                 player[1] = w[1] + w[3]
 
+    player[0] += player_vx
+    player[1] += player_vy
 
+    ''' get block edges (makes collision resolution easier to read) '''
+
+    top = player[1]
+    bottom = player[1] + player[3]
+    left = player[0]
+    right = player[0] + player[2]
+    if case == 1:
+        ''' if the block is moved out of the window, nudge it back on. '''
+        if top < 0:
+            player[1] = 0
+        elif bottom > HEIGHT:
+            player[1] = HEIGHT - player[3]
+        if left <0:
+            player[0] = 0
+        elif right > WIDTH:
+            player[0] = WIDTH - player[2]
     ''' here is where you should resolve player collisions with screen edges '''
 
 
